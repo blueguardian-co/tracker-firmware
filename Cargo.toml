@@ -1,0 +1,11 @@
+[package]
+name = "firmware"
+edition = "2021"
+version = "0.1.0"
+
+[lib]
+path = "src/lib.rs"
+name = "firmware"
+edition = "2021"
+crate-type = ["staticlib"]
+required-features = []
