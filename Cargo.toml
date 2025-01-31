@@ -1,11 +1,32 @@
 [package]
-name = "firmware"
-edition = "2021"
+name = "cerebral-stratum-firmware"
 version = "0.1.0"
-
-[lib]
-path = "src/lib.rs"
-name = "firmware"
+authors = ["Alex Hussey <alex@blueguardian.co>"]
 edition = "2021"
-crate-type = ["staticlib"]
-required-features = []
+resolver = "2"
+rust-version = "1.77"
+
+[[bin]]
+name = "cerebral-stratum-firmware"
+harness = false # do not use the built in cargo test harness -> resolve rust-analyzer errors
+
+[profile.release]
+opt-level = "s"
+
+[profile.dev]
+debug = true    # Symbols are nice and they don't increase the size on Flash
+opt-level = "z"
+
+[features]
+default = []
+
+experimental = ["esp-idf-svc/experimental"]
+
+[dependencies]
+log = "0.4"
+esp-idf-svc = { version = "0.51", features = ["critical-section", "embassy-time-driver", "embassy-sync"] }
+rumqttc = "0.24.0"
+uuid = { version = "1.12.1", features = ["std", "v5"] }
+
+[build-dependencies]
+embuild = "0.33"

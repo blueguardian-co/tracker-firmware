@@ -1,2 +1,4 @@
-.pio
-CMakeFiles/
+/.vscode
+/.embuild
+/target
+/Cargo.lock
